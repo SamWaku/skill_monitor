@@ -1,32 +1,23 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import uuid from 'react-uuid';
+import { connect } from 'react-redux';
+import { getItems, deleteItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
-class Skill_List extends Component {
-    state = {
-        items: [
-            {id: uuid(), name: 'Javascript' },
-            {id: uuid(), name: 'Python' }
-        ]
+class SkillList extends Component {
+    componentDidMount() {
+        this.props.getItems();
     }
+
+    onDeleteClick = (id) => {
+        this.props.deleteItem(id);
+    };
+
     render() {
-        const { items } = this.state;
+        const { items } = this.props.item;
         return(
             <Container>
-                <Button
-                color="success"
-                style={{marginBottom: '2rem'}}
-                onClick={() => {
-                    const name = prompt('Enter your skill exeh');
-                    if(name){
-                        this.setState(state => ({
-                            items: [...state.items, { id: uuid(), name }]
-                        }));
-                    }
-                }}
-                >Add Skill</Button>
-
                 <ListGroup>
                     <TransitionGroup className="skill-list">
                         {items.map(({ id, name }) => (
@@ -36,11 +27,7 @@ class Skill_List extends Component {
                                         className="remove-btn"
                                         color="danger"
                                         size="sm"
-                                        onClick = {() => {
-                                            this.setState(state => ({
-                                                items: this.state.items.filter(item => item.id !== id)
-                                            }));
-                                        }}
+                                        onClick = {this.onDeleteClick.bind(this, id)}
                                     >&times;</Button>
                                     {name}
                                 </ListGroupItem>
@@ -52,4 +39,14 @@ class Skill_List extends Component {
         );
     }
 }
-export default Skill_List;
+
+SkillList.propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    item: state.item
+});
+
+export default  connect(mapStateToProps, { getItems, deleteItem })(SkillList);
