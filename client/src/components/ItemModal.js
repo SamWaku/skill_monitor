@@ -12,7 +12,7 @@ import {
 
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import uuid from 'react-uuid';
+
 
 class ItemModal extends Component {
     state = {
@@ -34,7 +34,6 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const newItem = {
-            id: uuid(),
             name: this.state.name
         }
 
@@ -54,15 +53,14 @@ class ItemModal extends Component {
                 onClick={this.toggle}
                 > Add Skill </Button>
                 <div>
-                <Modal
-                    isOpen={this.state.modal}
-                    toggle={this.toggle}
-                >  
-                <ModalHeader toggle={this.toggle}> Add to Skill List</ModalHeader>
-                <ModalBody>
-                    <Form onSubmit={this.onSubmit}>
+
+                     
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>  
+                    <ModalHeader toggle={this.toggle}> Add to Skill List </ModalHeader>
+                    <ModalBody>
+                     <Form onSubmit={this.onSubmit}>
                         <FormGroup>
-                            <Label for="skill">Item</Label>
+                            <Label for="skill">Skill</Label>
                             <Input
                             type="text"
                             name="name"
@@ -70,13 +68,8 @@ class ItemModal extends Component {
                             placeholder="Add skill item"
                             onChange={this.onChange}
                             />
-                            <div>
-                            <Button
-                                color="dark"
-                                style={{marginTop: '2rem'}}
-                                block
-                            > Add Skill</Button>
-                            </div>
+                            <Button color="dark" style={{marginTop: '2rem'}} block
+                            > Add Skill</Button> 
                         </FormGroup>
                     </Form>
                 </ModalBody>
