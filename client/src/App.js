@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import SkillList from './components/SkillList';
 import AppNavbar from './components/AppNavbar';
+import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
 
 import { Provider  } from 'react-redux';
 import store from './store';
-import ItemModal from './components/ItemModal';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
