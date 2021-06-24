@@ -1,2 +1,2 @@
 # skill_monitor
- This is a basic skill monitor application
+ A basic skill monitor fullstack MERN application
